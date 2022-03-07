@@ -1,3 +1,10 @@
+
+let queryString = window.location.search
+console.log(queryString)
+let params = new URLSearchParams(queryString)
+let title = params.get('title')
+console.log(title)
+
 const getJSONP = (url, success) => {
     const ud = `_${+new Date()}`;
     const script = document.createElement('script');
@@ -10,12 +17,13 @@ const getJSONP = (url, success) => {
   };
   
   const getArticleWithTitle = (title, success) => {
-    // let url = '//en.wikipedia.org/w/api.php?';
+    //make title a button param input from somewhere on the wiki itself
+    // title = 'Tactics'
     let url = 'https://intersectionalai.miraheze.org/w/api.php?'
     url += 'action=parse';
     url += '&format=json';
     url += '&prop=text';
-    url += `&page=${title}`;
+    url += `&page=${title}`; // replace with the button data
     url += '&disableeditsection=true';
     url += '&callback=?';
     // url += '&centralauth-token=${TOKEN}'; // MAYBE???
@@ -28,8 +36,3 @@ const getJSONP = (url, success) => {
       success(wrap);
     });
   };
-
-  let getAuth = (token, success) => {
-    let auth = "04778e7e109fadf0b63b86afa3a7c7064e2a3"
-
-  } 

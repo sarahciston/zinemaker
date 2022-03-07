@@ -4,14 +4,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bindery Ex 6 — Wikipedia Content</title>
-  <link rel="stylesheet" type="text/css" href="book.css" />
+  <title>Zine: Intersectional AI Toolkit</title>
+  <link rel="stylesheet" type="text/css" href="css/wiki.css" />
 </head>
 
 <body>
 <!--  {% include latest-bindery.html %} -->
   <script type="text/javascript" src="js/wikiAPI.js"></script>
   <script>
+  //find a way to insert title here from the wiki itself via a button to replace 'Book' 
     getArticleWithTitle('Book', (article) => {
       let originalArticle = article;
 
@@ -103,6 +104,6 @@
     });
   </script>
 
- <script type="text/javascript" src='/js/bindery.min.js'></script>
+ <script type="text/javascript" src="https://unpkg.com/bindery@2.3.0"></script>
 </body>
 </html>
