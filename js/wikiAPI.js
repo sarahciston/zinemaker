@@ -1,10 +1,4 @@
 
-let queryString = window.location.search
-console.log(queryString)
-let params = new URLSearchParams(queryString)
-let title = params.get('title')
-console.log(title)
-
 const getJSONP = (url, success) => {
     const ud = `_${+new Date()}`;
     const script = document.createElement('script');
@@ -16,9 +10,10 @@ const getJSONP = (url, success) => {
     document.head.appendChild(script);
   };
   
-  const getArticleWithTitle = (title, success) => {
+let getArticleWithTitle = (title, success) => {
     //make title a button param input from somewhere on the wiki itself
     // title = 'Tactics'
+    console.log(title)
     let url = 'https://intersectionalai.miraheze.org/w/api.php?'
     url += 'action=parse';
     url += '&format=json';
