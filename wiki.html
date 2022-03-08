@@ -10,16 +10,19 @@
 
 <body>
 <!--  {% include latest-bindery.html %} -->
+
   <script type="text/javascript" src="js/wikiAPI.js"></script>
   <script>
 
     let queryString = window.location.search
     let params = new URLSearchParams(queryString)
     let title = params.get('title')
+
+    
   //find a way to insert title here from the wiki itself via a button to replace 'Book' 
     getArticleWithTitle(title, (article) => {
       console.log(title)
-  
+
       let originalArticle = article;
 
       const {
@@ -29,14 +32,31 @@
         Replace,
         Footnote,
         RunningHeader,
-        PageReference
+        PageReference,
+        createRule,
       } = Bindery;
+
+      let addLogo = createRule({
+        selector: 'h1',
+        //position: 'before',
+        render: (element) => {
+          console.log(element)
+          let logo = document.createElement('IMG');
+          logo.src = "assets/LC-IAILogo.png";
+          console.log(logo.src)
+          let firstHed = document.getElementsByClassName("mw-parser-output")
+          console.log(firstHed)
+          return firstHed.appendChild(logo);
+          //return logo //document.body.appendChild(logo);
+        },
+      });
 
       makeBook({
         content: originalArticle,
         rules: [
+          addLogo,
           PageBreak({ selector: '.vertical-navbox', position: 'before', continue: 'right' }),
-          PageBreak({ selector: 'h2', position: 'before', continue: 'right' }),
+          //PageBreak({ selector: 'h2', position: 'before', continue: 'next' }),
           PageBreak({ selector: 'tr', position: 'avoid' }),
           Split({ selector: 'th', fromPrevious: 'th-continued' }),
           Replace({
@@ -108,6 +128,13 @@
         ],
       });
     });
+
+      /*let firstHed = document.getElementsByClassName("📖-continues")
+      console.log(firstHed)
+      let logo = document.createElement('IMG');
+      logo.src = "assets/LC-IAILogo.png";
+      console.log(logo.src)
+      firstHed.appendChild(logo); */
   </script>
 
  <script type="text/javascript" src="https://unpkg.com/bindery@2.3.0"></script>
